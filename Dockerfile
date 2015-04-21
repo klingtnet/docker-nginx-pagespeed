@@ -1,6 +1,9 @@
 FROM debian:latest
 MAINTAINER Andreas Linz "klingt.net@gmail.com"
 
+# inspired by the official nginx docker container
+# https://github.com/nginxinc/docker-nginx/blob/master/Dockerfile
+
 RUN apt-get update
 RUN apt-get install -y build-essential \
     curl \
@@ -70,4 +73,11 @@ RUN NPS_VERSION=1.9.32.3 \
     make install &&\
     cd / && rm -rf ${TMP_DIR}
 
-EXPOSE 8080
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
+
+EXPOSE 80 443
+
+VOLUME [ "/usr/share/sites", "/etc/nginx" ]
+
+CMD [ "nginx", "-g", "daemon off;" ]
