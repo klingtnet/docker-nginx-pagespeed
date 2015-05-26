@@ -17,8 +17,8 @@ RUN apt-get install -y build-essential \
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN NPS_VERSION=1.9.32.3 \
-    NGINX_VERSION=1.7.12 \
     PCRE_VERSION=8.35 \
+    NGINX_VERSION=1.9.0 \
     ZLIB_VERSION=1.2.8 \
     OPENSSL_VERSION=1_0_2a \
     NGINX_LOG_PATH=/var/log/nginx \
