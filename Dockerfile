@@ -16,7 +16,7 @@ RUN apt-get install -y build-essential \
     zlib1g-dev 
 RUN rm -rf /var/lib/apt/lists/*
 
-RUN NPS_VERSION=1.9.32.3 \
+RUN NPS_VERSION=1.9.32.4 \
     PCRE_VERSION=8.37 \
     NGINX_VERSION=1.9.2 \
     ZLIB_VERSION=1.2.8 \
