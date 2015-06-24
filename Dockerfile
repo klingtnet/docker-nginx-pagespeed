@@ -18,7 +18,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 RUN NPS_VERSION=1.9.32.3 \
     PCRE_VERSION=8.37 \
-    NGINX_VERSION=1.9.1 \
+    NGINX_VERSION=1.9.2 \
     ZLIB_VERSION=1.2.8 \
     OPENSSL_VERSION=1_0_2a \
     NGINX_LOG_PATH=/var/log/nginx \
@@ -29,7 +29,7 @@ RUN NPS_VERSION=1.9.32.3 \
         -C ${TMP_DIR} &&\
     curl -Ls https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz | tar -xvzf - \
         -C ${TMP_DIR}/ngx_pagespeed-${NPS_VERSION}-beta --exclude=lib/Debug &&\
-    curl -Ls https://github.com/nginx/nginx/archive/v${NGINX_VERSION}.tar.gz | tar -xvzf - \
+    curl -Ls https://github.com/nginx/nginx/archive/release-${NGINX_VERSION}.tar.gz | tar -xvzf - \
         -C ${TMP_DIR} &&\
     curl -Ls ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${PCRE_VERSION}.tar.gz | tar -xvzf - \
         -C ${TMP_DIR} &&\
@@ -37,8 +37,8 @@ RUN NPS_VERSION=1.9.32.3 \
         -C ${TMP_DIR} &&\
     curl -Ls https://github.com/openssl/openssl/archive/OpenSSL_${OPENSSL_VERSION}.tar.gz | tar -xzvf - \
         -C ${TMP_DIR} &&\
-    cd ${TMP_DIR}/nginx-${NGINX_VERSION} &&\
-    ./configure \
+    cd ${TMP_DIR}/nginx-release-${NGINX_VERSION} &&\
+    ./auto/configure \
         --add-module=${TMP_DIR}/ngx_pagespeed-${NPS_VERSION}-beta \
         --conf-path=/etc/nginx/nginx.conf \
         --error-log-path=${NGINX_LOG_PATH}/error.log \
